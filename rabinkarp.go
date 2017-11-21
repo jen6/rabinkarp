@@ -12,18 +12,15 @@ const base = 16777619
 
 // Search searches given patterns in txt and returns the matched ones. Returns
 // empty string slice if there is no match.
-func Search(txt string, patterns []string) []string {
+func Search(txt string, patterns []string) bool {
 	in := indices(txt, patterns)
-	matches := make([]string, len(in))
-	i := 0
-	for j, p := range patterns {
+	for j, _ := range patterns {
 		if _, ok := in[j]; ok {
-			matches[i] = p
-			i++
+			return true
 		}
 	}
 
-	return matches
+	return false
 }
 
 // indices returns the indices of the first occurence of each pattern in txt.

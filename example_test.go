@@ -3,7 +3,7 @@ package rabinkarp_test
 import (
 	"fmt"
 
-	"github.com/glkz/rabinkarp"
+	"github.com/jen6/rabinkarp"
 )
 
 func Example() {
@@ -14,5 +14,5 @@ func Example() {
 	fmt.Println(matches)
 
 	// Output:
-	// [man plan ana]
+	// true
 }

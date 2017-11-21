@@ -11,22 +11,22 @@ import (
 var SearchTests = []struct {
 	txt      string
 	patterns []string
-	expected []string
+	expected bool
 }{
-	{"hello world", []string{"hell", "yeah", "lo"}, []string{"hell", "lo"}},
-	{"lorem ipsum dolor", []string{"lorem", "lor", "dolor"}, []string{"lorem", "lor", "dolor"}},
-	{"hel", []string{"hell", "yeah"}, []string{}},
-	{"", []string{"hell", "yeah"}, []string{}},
-	{"", []string{}, []string{}},
-	{"", []string{""}, []string{""}},
+	{"hello world", []string{"hell", "yeah", "lo"}, true},
+	{"lorem ipsum dolor", []string{"lorem", "lor", "dolor"}, true},
+	{"hel", []string{"hell", "yeah"}, false},
+	{"", []string{"hell", "yeah"}, false},
+	{"", []string{}, false},
+	{"", []string{""}, true},
 	{"ε-δ def: Let ƒ:D→R, ∀ε > 0, ∃ a δ > 0 such ∀x∈D that satisfy 0 < |x - c| < δ, the inequality |ƒ(x) - L| < ε holds.",
-		[]string{"ƒ:D→R", "√3", "ε-δ", "ƒ(x)", "f(x)", "∀x"}, []string{"ƒ:D→R", "ε-δ", "ƒ(x)", "∀x"}},
+		[]string{"ƒ:D→R", "√3", "ε-δ", "ƒ(x)", "f(x)", "∀x"}, true},
 }
 
 func TestSearch(t *testing.T) {
 	for _, ct := range SearchTests {
 		found := Search(ct.txt, ct.patterns)
-		if !eq(found, ct.expected) {
+		if found != ct.expected {
 			t.Errorf("Search(%s, %#v) = %#v, want %#v",
 				ct.txt, ct.patterns, found, ct.expected)
 		}
